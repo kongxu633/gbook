@@ -85,13 +85,6 @@
         <a class="weui_btn weui_btn_primary" href="javascript:" id="showTooltips">确定</a>
     </div>
 
-
-<div style="width:500px;margin:10px auto; border:solid 1px #ddd; overflow:hidden; ">
-  <input type="file" id="uploadphoto" name="uploadfile" value="请点击上传图片"   style="display:none;" /> 
-  <div class="imglist"></div> 
-  <a href="javascript:void(0);" onclick="uploadphoto.click()" class="uploadbtn">点击上传文件</a>
-</div>
-
     <script src="./js/zepto.min.js"></script>
     <script src="./js/example.js"></script>
     <script src='./js/LocalResizeIMG.js'></script>
@@ -100,7 +93,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(e) {
-   $('#uploadphoto').localResizeIMG({
+   $('.weui_uploader_input').localResizeIMG({
       width: 400,
       quality: 1,
       success: function (result) {  
