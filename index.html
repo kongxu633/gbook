@@ -65,17 +65,13 @@
                     </div>
                     <div class="weui_uploader_bd">
                         <ul class="weui_uploader_files">
-                            <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
-                            <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
-                            <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
-                            <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
+
+                            <!-- <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
                                 <div class="weui_uploader_status_content">
                                     <i class="weui_icon_warn"></i>
                                 </div>
-                            </li>
-                            <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
-                                <div class="weui_uploader_status_content">50%</div>
-                            </li>
+                            </li> -->
+
                         </ul>
                         <div class="weui_uploader_input_wrp">
                             <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple />
@@ -90,7 +86,57 @@
     </div>
 
 
+<div style="width:500px;margin:10px auto; border:solid 1px #ddd; overflow:hidden; ">
+  <input type="file" id="uploadphoto" name="uploadfile" value="请点击上传图片"   style="display:none;" /> 
+  <div class="imglist"></div> 
+  <a href="javascript:void(0);" onclick="uploadphoto.click()" class="uploadbtn">点击上传文件</a>
+</div>
+
     <script src="./js/zepto.min.js"></script>
     <script src="./js/example.js"></script>
+    <script src='./js/LocalResizeIMG.js'></script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+   $('#uploadphoto').localResizeIMG({
+      width: 400,
+      quality: 1,
+      success: function (result) {  
+          var submitData={
+                base64_string:result.clearBase64, 
+            }; 
+        $.ajax({
+           type: "POST",
+           url: "upload.php",
+           data: submitData,
+           dataType:"json",
+           success: function(data){
+             if (0 == data.status) {
+                alert(data.content);
+                return false;
+             }else{
+                alert(data.content);
+                //var attstr= '<img src="'+data.url+'">'; 
+                var attstr= '<li class="weui_uploader_file" style="background-image:url('+data.url+')"></li>';
+                $(".weui_uploader_files").append(attstr);
+                return false;
+             }
+           }, 
+            complete :function(XMLHttpRequest, textStatus){
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){ //上传失败 
+               //alert(XMLHttpRequest.status);
+               //alert(XMLHttpRequest.readyState);
+               alert(textStatus);
+            }
+        }); 
+      }
+  });
+
+}); 
+</script>
+
 </body>
 </html>
