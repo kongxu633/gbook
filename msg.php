@@ -2,6 +2,9 @@
     $con = $_POST['con'];
     $pics = $_POST['pics'];
 
+    //防止转换  这种形式  src=\"www.baidu.com\"
+    $pics = str_replace('\\','',$pics);
+
     $savename = $filename = date("Ymd").".html";
     $savepath = './html/'.$savename;
 
