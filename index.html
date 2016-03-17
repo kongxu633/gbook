@@ -168,7 +168,7 @@ document.querySelector('.weui_uploader_input').addEventListener('change', functi
                     return false;
                  }else{
                     
-                    var picstr = '<p><a href="../'+data.url+'" _target="blank">'+data.url+'</a><img src="../'+data.url+'" width="200"></p>';
+                    var picstr = '<p><a href="../'+data.url+'" target="_blank">'+data.url+'</a><img src="../'+data.url+'" width="200"></p>';
                     var nowstr = $('#pics').val();
                     $('#pics').val(nowstr + picstr);
 

@@ -2,25 +2,21 @@
     $con = $_POST['con'];
     $pics = $_POST['pics'];
 
-
     $savename = $filename = date("Ymd").".html";
-    $savepath = 'html/'.$savename; 
-
+    $savepath = './html/'.$savename;
 
     $nowtime = date("Y-m-d H:i:s");
     $html = '<p>时间：'.$nowtime.'</p>'.'<p>'.$con.'</p>'.$pics.'<hr>';
 
+    if(file_exists($savepath)){
 
-    $filepath = dirname(__FILE__) . '/html/' . $savename;
-
-    if(file_exists($filepath)){
         $file = file_put_contents($savepath,  $html, FILE_APPEND);
     }
     else{
+
         $html = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">' . $html;
         $file = file_put_contents($savepath,  $html);        
     }
-    
 
     // if($file){
     //     echo '{"status":1,"content":"上传成功","url":"'.$savepath.'"}';
