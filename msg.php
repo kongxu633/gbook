@@ -8,10 +8,19 @@
 
 
     $nowtime = date("Y-m-d H:i:s");
-    $html = '<p>'.$nowtime.'</p>'.'<p>'.$con.'</p>'.$pics.'<hr>';
+    $html = '<p>时间：'.$nowtime.'</p>'.'<p>'.$con.'</p>'.$pics.'<hr>';
 
-    $file = file_put_contents($savepath,  $html, FILE_APPEND);
 
+    $filepath = dirname(__FILE__) . '/html/' . $savename;
+
+    if(file_exists($filepath)){
+        $file = file_put_contents($savepath,  $html, FILE_APPEND);
+    }
+    else{
+        $html = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">' . $html;
+        $file = file_put_contents($savepath,  $html);        
+    }
+    
 
     // if($file){
     //     echo '{"status":1,"content":"上传成功","url":"'.$savepath.'"}';
