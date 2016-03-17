@@ -46,10 +46,10 @@
     <div class="weui_dialog_alert" id="dialog" style="display: none;">
         <div class="weui_mask"></div>
         <div class="weui_dialog">
-            <div class="weui_dialog_hd"><i class="weui_icon_success weui_icon_msg"></i></div>
-            <div class="weui_dialog_bd">感谢您的留言，我们会尽快与您联系！</div>
+            <div class="weui_dialog_hd"><i class="weui_icon_warn weui_icon_msg"></i></div>
+            <div class="weui_dialog_bd">留言内容为空!</div>
             <div class="weui_dialog_ft">
-                <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+                <a href="javascript:$('#dialog').hide();" class="weui_btn_dialog primary">确定</a>
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@
         </div>
     </div>
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_primary" href="javascript:$('#myform').submit();" id="showTooltips">确定</a>
+        <a class="weui_btn weui_btn_primary" href="javascript:mysubmit();" id="mysubmit">确定</a>
     </div>
 
     </form>
@@ -132,6 +132,18 @@ function showLoadingToast() {
             return;
         }
         $loadingToast.show();
+}
+
+function mysubmit(){
+    if($('#con').val()==""){
+        $('#dialog').show();
+    }
+    else{
+
+        $('#mysubmit').removeAttr('href');
+        $('#mysubmit').addClass('weui_btn_disabled');
+        $('#myform').submit();
+    }
 }
 
 document.querySelector('.weui_uploader_input').addEventListener('change', function () {
