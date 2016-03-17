@@ -94,15 +94,13 @@
       <a href="javascript:void(0);" onclick="uploadphoto.click()" class="uploadbtn">点击上传文件</a>
     </div> -->
 
-
     <div>
         <p><br></p>
     </div>
 
-    <script src="./js/jquery.min.js"></script>
+    <script src="./js/zepto.min.js"></script>
     <script src="./js/example.js"></script>
-    <script src='./js/LocalResizeIMG.js'></script>
-    <script src='./js/patch/mobileBUGFix.mini.js'></script>
+    <script src='./js/lrz.all.bundle.js'></script>
 
 
 <script type="text/javascript">
@@ -130,53 +128,104 @@ function showLoadingToast() {
         $loadingToast.show();
 }
 
-$(document).ready(function(e) {
-   $('.weui_uploader_input').localResizeIMG({
-      width: 400,
-      quality: 1,
-      before:function(){
-        showLoadingToast();
-      },
-      success: function (result) {  
-          var submitData={
-                base64_string:result.clearBase64, 
+document.querySelector('.weui_uploader_input').addEventListener('change', function () {
+
+    showLoadingToast();
+
+    lrz(this.files[0])
+        .then(function (result) {
+            var submitData={
+                base64_string:result.base64.substr(result.base64.indexOf(',') + 1), 
             }; 
-        $.ajax({
+            $.ajax({
 
-            type: "POST",
-            url: "upload.php",
-            data: submitData,
-            dataType:"json",
-            success: function(data){
-             if (0 == data.status) {
-                alert(data.content);
-                return false;
-             }else{
-                //alert(data.content);
-                //var attstr= '<img src="'+data.url+'">'; 
-                //$(".imglist").append(attstr);
-                var attstr= '<li class="weui_uploader_file" style="background-image:url('+data.url+')"></li>';
-                $(".weui_uploader_files").append(attstr);
-                return false;
-             }
-            }, 
-            beforeSend: function () {
-                //$('#loadingToast').show();
-            },          
-            complete :function(XMLHttpRequest, textStatus){
-                showToast();
-            },
-            error:function(XMLHttpRequest, textStatus, errorThrown){ //上传失败 
-               //alert(XMLHttpRequest.status);
-               //alert(XMLHttpRequest.readyState);
-               alert(textStatus);
-            }
+                type: "POST",
+                url: "upload.php",
+                data: submitData,
+                dataType:"json",
+                success: function(data){
+                 if (0 == data.status) {
+                    alert(data.content);
+                    return false;
+                 }else{
+                    //alert(data.content);
+                    //var attstr= '<img src="'+data.url+'">'; 
+                    //$(".imglist").append(attstr);
+                    var attstr= '<li class="weui_uploader_file" style="background-image:url('+data.url+')"></li>';
+                    $(".weui_uploader_files").append(attstr);
+                    return false;
+                 }
+                }, 
+                beforeSend: function () {
+                    //$('#loadingToast').show();
+                },          
+                complete :function(XMLHttpRequest, textStatus){
+                    showToast();
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){ //上传失败 
+                   //alert(XMLHttpRequest.status);
+                   //alert(XMLHttpRequest.readyState);
+                   alert(textStatus);
+                }
+            }); 
+       
+        })
+        .catch(function (err) {
+            // 处理失败会执行
+        })
+        .always(function () {
+            // 不管是成功失败，都会执行
+        });
+});
 
-        }); 
-      }
-  });
 
-}); 
+// $(document).ready(function(e) {
+//    $('.weui_uploader_input').localResizeIMG({
+//       width: 400,
+//       quality: 1,
+//       before:function(){
+//         showLoadingToast();
+//       },
+//       success: function (result) {  
+//           var submitData={
+//                 base64_string:result.clearBase64, 
+//             }; 
+//         $.ajax({
+
+//             type: "POST",
+//             url: "upload.php",
+//             data: submitData,
+//             dataType:"json",
+//             success: function(data){
+//              if (0 == data.status) {
+//                 alert(data.content);
+//                 return false;
+//              }else{
+//                 //alert(data.content);
+//                 //var attstr= '<img src="'+data.url+'">'; 
+//                 //$(".imglist").append(attstr);
+//                 var attstr= '<li class="weui_uploader_file" style="background-image:url('+data.url+')"></li>';
+//                 $(".weui_uploader_files").append(attstr);
+//                 return false;
+//              }
+//             }, 
+//             beforeSend: function () {
+//                 //$('#loadingToast').show();
+//             },          
+//             complete :function(XMLHttpRequest, textStatus){
+//                 showToast();
+//             },
+//             error:function(XMLHttpRequest, textStatus, errorThrown){ //上传失败 
+//                //alert(XMLHttpRequest.status);
+//                //alert(XMLHttpRequest.readyState);
+//                alert(textStatus);
+//             }
+
+//         }); 
+//       }
+//   });
+
+// }); 
 </script>
 
 </body>
