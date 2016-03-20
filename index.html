@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>留言板</title>
+    <title>纺城微中介</title>
     <link rel="stylesheet" href="./css/weui.min.css"/>
 </head>
 <body>
@@ -57,7 +57,7 @@
 
     <form id="myform" action="msg.php" method="post">
 
-    <!-- <div class="weui_cells_title">内容</div> -->
+    <div class="weui_cells_title"><b>家纺城公众圈</b>免费为大家发布招聘求职、房屋租售、供求信息、寻人启事等信息。请留言：</div>
     <div class="weui_cells weui_cells_form">
         <div class="weui_cell">
             <div class="weui_cell_bd weui_cell_primary">
@@ -96,8 +96,8 @@
     </form>
 
     <!-- <div style="width:500px;margin:10px auto; border:solid 1px #ddd; overflow:hidden; ">
-      <input type="file" id="uploadphoto" name="uploadfile" value="请点击上传图片"   style="display:none;" /> 
-      <div class="imglist"></div> 
+      <input type="file" id="uploadphoto" name="uploadfile" value="请点击上传图片"   style="display:none;" />
+      <div class="imglist"></div>
       <a href="javascript:void(0);" onclick="uploadphoto.click()" class="uploadbtn">点击上传文件</a>
     </div> -->
 
@@ -119,7 +119,7 @@ function showToast() {
         var $loadingToast = $('#loadingToast');
         if ($loadingToast.css('display') != 'none') {
             $loadingToast.hide();
-        }        
+        }
 
         $toast.show();
         setTimeout(function () {
@@ -150,7 +150,7 @@ document.querySelector('.weui_uploader_input').addEventListener('change', functi
 
     //正在处理图片
     showLoadingToast();
-    
+
 
     lrz(this.files[0])
         .then(function (result) {
@@ -167,7 +167,7 @@ document.querySelector('.weui_uploader_input').addEventListener('change', functi
                     alert(data.content);
                     return false;
                  }else{
-                    
+
                     var picstr = '<p><a href="../'+data.url+'" target="_blank">'+data.url+'</a><img src="../'+data.url+'" width="200"></p>';
                     var nowstr = $('#pics').val();
                     $('#pics').val(nowstr + picstr);
@@ -176,20 +176,20 @@ document.querySelector('.weui_uploader_input').addEventListener('change', functi
                     $(".weui_uploader_files").append(attstr);
                     return false;
                  }
-                }, 
+                },
                 beforeSend: function () {
                     //准备上传
-                },          
+                },
                 complete :function(XMLHttpRequest, textStatus){
                     showToast();
                 },
-                error:function(XMLHttpRequest, textStatus, errorThrown){ //上传失败 
+                error:function(XMLHttpRequest, textStatus, errorThrown){ //上传失败
                    //alert(XMLHttpRequest.status);
                    //alert(XMLHttpRequest.readyState);
                    alert(textStatus);
                 }
-            }); 
-       
+            });
+
         })
         .catch(function (err) {
             // 处理失败会执行

@@ -15,7 +15,7 @@ foreach ($filesnames as $key => $value) {
 
 }
 
-//兼容的scandir 防止主机禁用函数
+//兼容的scandir
 function scandirs($dir){
     $arr=array();
     if(!function_exists('scandir')){
