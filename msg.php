@@ -51,7 +51,7 @@
     <!--END dialog2-->
 
     <div class="weui_msg">
-        <div class="weui_icon_area"><a href="list.php" target="_blank"><i class="weui_icon_success weui_icon_msg"></i></a></div>
+        <div class="weui_icon_area"><i class="weui_icon_success weui_icon_msg"></i></div>
         <div class="weui_text_area">
             <h2 class="weui_msg_title">操作成功</h2>
             <p class="weui_msg_desc">感谢您的留言，我们会尽快核实后发布！</p>
