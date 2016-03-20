@@ -34,8 +34,10 @@ function mysubmit(){
     }
 }
 
-document.querySelector('.weui_uploader_input').addEventListener('change', function () {
 
+
+//document.querySelector('.weui_uploader_input').addEventListener('change', function () {
+$(".weui_uploader_input").on('change',function(){
     //正在处理图片
     showLoadingToast();
 
