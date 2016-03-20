@@ -2,9 +2,8 @@
  
     $base64_string = $_POST['base64_string'];
 
-    $savename = uniqid().'.jpeg';//localResizeIMG压缩后的图片都是jpeg格式
-
-    $savepath = 'images/'.$savename; 
+    $savename = date("Ymd").'/'.uniqid().'.jpeg';//localResizeIMG压缩后的图片都是jpeg格式
+    $savepath = 'images/'.$savename;
 
     $image = base64_to_img( $base64_string, $savepath );
 
