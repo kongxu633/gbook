@@ -104,12 +104,6 @@ $(document).ready(function() {
                 });
 
             });
-            .catch(function (err) {
-                // 处理失败会执行
-            });
-            .always(function () {
-                // 不管是成功失败，都会执行
-            });
     });
 
 });
