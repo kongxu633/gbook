@@ -1,5 +1,9 @@
 <?php
-
+    if( !isset($_GET['pass']) || 'jfbst' != $_GET['pass'] ) {
+            die();
+    }
+?>
+<?php
 
 $hostdir= dirname(__FILE__) . '/html/' ;
 //获取本文件目录的文件夹地址
@@ -31,3 +35,4 @@ function scandirs($dir){
 }
 
 ?>
+

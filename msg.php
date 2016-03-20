@@ -4,7 +4,7 @@
 
     $pics = str_replace('\\','',$pics);
 
-    $savename = $filename = date("Ymd").".html";
+    $savename = $filename = date("Ymd").'_'.md5(date("Ymd")).".html";
     $savepath = './html/'.$savename;
 
     $nowtime = date("Y-m-d H:i:s");
