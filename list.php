@@ -34,8 +34,8 @@
                 <body>
                 <form action="?pass=jfbst" method="post">
                     <label for="password">查看密码:</label>
-                    <input type="text" id="password" name="password">
-                    <input type="submit">
+                    <input type="password" id="password" name="password">
+                    <input type="submit" value="提交">
                 </form>
                 </body>
                 </html>
