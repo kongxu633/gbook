@@ -1,8 +1,20 @@
 <?php
-    $con = $_POST['con'];
-    $pics = $_POST['pics'];
-
+    $con = isset($_POST['con']) ? $_POST['con'] : '';
+    $pics = isset($_POST['pics']) ? $_POST['pics'] : '';
     $pics = str_replace('\\','',$pics);
+
+    //PHP 判断来路 判断POST 判断为空 转义
+    if(
+        strtoupper($_SERVER['REQUEST_METHOD']) !== 'POST' ||
+        !isset($_SERVER['HTTP_REFERER'])    ||
+        empty($con)
+    ){
+        die;
+    }
+    else{
+        $con = htmlspecialchars($con);
+        $pics = htmlspecialchars($pics);
+    }
 
     $savename = $filename = date("Ymd").'_'.md5(date("Ymd")).".html";
     $savepath = './html/'.$savename;
@@ -63,5 +75,13 @@
             </p>
         </div>
     </div>
+
+    <div style="display:none;">
+        <script type="text/javascript">
+            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F1692fe68d3a6d004740aedb182493f4b' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+    </div>
+
 </body>
 </html>
